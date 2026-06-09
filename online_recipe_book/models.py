@@ -1,19 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
-
+from sqlalchemy import Column, Integer, String, Text
 from database import Base
-
-
-class Category(Base):
-    __tablename__ = "categories"
-
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, unique=True)
-
-    recipes = relationship(
-        "Recipe",
-        back_populates="category"
-    )
 
 
 class Recipe(Base):
@@ -21,18 +7,8 @@ class Recipe(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    description = Column(String)
-    ingredients = Column(String)
-
-    category_id = Column(
-        Integer,
-        ForeignKey("categories.id")
-    )
-
-    category = relationship(
-        "Category",
-        back_populates="recipes"
-    )
-
-
-
+    description = Column(Text)
+    ingredients = Column(Text)
+    instructions = Column(Text)
+    cuisine = Column(String)
+    difficulty = Column(String)
