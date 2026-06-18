@@ -1,11 +1,9 @@
-
-
 from fastapi import FastAPI, Depends, HTTPException
 from typing import List
-from crud import create_item, get_items, get_item, delete_item
-from models import item
+from crud import create_item, get_items, get_item, update_item, delete_item
+from models import Item
 from security import get_api_key
-from database import int_db
+from database import init_db
 
 app = FastAPI()
 
@@ -40,35 +38,3 @@ def delete_existing_item(item_id: int, api_key: str = Depends(get_api_key)):
     if not result:
         raise HTTPException(status_code=404, detail="Item not found")
     return {"detail": "Item deleted successfully"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
